@@ -27,7 +27,7 @@ $gridColumns = [
         'format' => ['date', 'php:d.m.Y H:i:s'],
     ],
     'updaterName',
-    ['class' => 'kartik\grid\ActionColumn', 'urlCreator'=>function(){return '#';}]
+   // ['class' => 'kartik\grid\ActionColumn', 'urlCreator'=>function(){return '#';}]
 ];
 
 $fullExportMenu = ExportMenu::widget([
