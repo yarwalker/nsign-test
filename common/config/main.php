@@ -6,6 +6,9 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'event_logs' => [
+            'class' => 'common\components\EventLogs',
+        ],
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=zdorov',

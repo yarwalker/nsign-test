@@ -1,13 +1,9 @@
 <?php
-
 namespace common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
-use backend\modules\orders\models\Logs;
-use common\helpers\OrderHelper;
-
 
 /**
  * This is the model class for table "orders".
@@ -25,6 +21,15 @@ use common\helpers\OrderHelper;
  */
 class Orders extends ActiveRecord
 {
+    const EVENT_CHANGE_ORDER = 'log_order_change';
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->on(Orders::EVENT_CHANGE_ORDER, [\Yii::$app->event_logs, 'logOrderChange']);
+    }
+
     /**
      * @inheritdoc
      */
@@ -118,37 +123,9 @@ class Orders extends ActiveRecord
 
     public function beforeSave($insert)
     {
-        $not_logged_fields = ['updated_by', 'updated_at', 'created_at'];
-
         if (parent::beforeSave($insert)) {
-            if( !$insert ) {
-                $this->updated_by = Yii::$app->user->getId();
-
-                $object = self::tableName();
-                $object_name = $this->name;
-                $dirties = $this->dirtyAttributes;
-
-                foreach($dirties as $k => $v) {
-                    $old_value = $this->getOldAttribute($k);
-
-                    if( $old_value !== $v && !in_array($k, $not_logged_fields) ) {
-                        if($k == 'good_id') {
-                            $old_value = OrderHelper::getGoodNameByID($old_value);
-                            $v = OrderHelper::getGoodNameByID($v);
-                        }
-
-                        Logs::add([
-                            'object' => $object,
-                            'object_name' => $object_name,
-                            'field' => $this->getAttributeLabel($k),
-                            'old_value' => (string) $old_value,
-                            'new_value' => (string) $v,
-                            'updated_by' => Yii::$app->user->identity->getId()
-                        ]);
-                    }
-
-                }
-            }
+            if( !$insert )
+                $this->trigger(self::EVENT_CHANGE_ORDER);
 
             return true;
         }
