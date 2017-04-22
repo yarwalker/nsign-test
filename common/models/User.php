@@ -52,6 +52,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_BLOCKED]],
+            ['email', 'email'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.']
         ];
     }
 

@@ -59,12 +59,6 @@ return [
                 '/users/create' => '/users/default/create',
                 '/users/update' => '/users/default/update',
                 '/users/delete' => '/users/default/delete',
-
-                '/orders' => '/orders/orders/index',
-                '/orders/view' => '/orders/orders/view',
-                '/orders/update' => '/orders/orders/update',
-
-                '/logs' => '/orders/logs/index',
             ],
         ],
 

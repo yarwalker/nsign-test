@@ -124,3 +124,21 @@ a.desc:after {
     line-height: 23px;
     vertical-align: bottom;
 }
+
+/*********************************************************/
+.ingridients { margin-bottom: 20px; }
+.available-ingridients, .dish-ingridients {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 500px;
+}
+
+.ingridient {
+    margin: 5px 0;
+    padding: 5px 10px 10px;
+    border: solid 1px #dedede;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    background-color: #fff;
+}

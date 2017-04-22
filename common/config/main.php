@@ -11,9 +11,9 @@ return [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=zdorov',
-            'username' => 'zdorov',
-            'password' => 'zdorov123',
+            'dsn' => 'mysql:host=localhost;dbname=nsign',
+            'username' => 'nsign',
+            'password' => 'nsign123',
             'charset' => 'utf8',
         ],
         'authManager' => [
